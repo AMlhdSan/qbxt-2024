@@ -1,5 +1,4 @@
-# Round 1 笔记
-# $Round$ $1$ $Notes$
+# Round 1 笔记 $|$ $Round$ $1$ $Notes$
 
 ## $T1$ $雅$
  

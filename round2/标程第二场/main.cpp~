@@ -1,0 +1,66 @@
+#include<bits/stdc++.h>
+#define LL long long
+#define SZ(x) ((LL)(x.size()))
+#define all(x) (x).begin(),(x).end()
+using namespace std;
+inline LL read(){
+  LL q=0,w=1;char ch=getchar();
+  while(ch>'9' || ch<'0'){if(ch=='-')w=-1;ch=getchar();}
+  while(ch>='0'&&ch<='9'){q=q*10+(ch-'0');ch=getchar();}
+  return q*w;
+}
+void write(LL x){
+  if(x<0){putchar('-');x=(-x);}
+  if(x>9)write(x/10);
+  putchar('0'+x%10);
+}
+inline void writeln(LL x){write(x);puts("");}
+inline void writecs(LL x){write(x);putchar(' ');}
+
+inline void dmin(LL &x,LL y){if(x>y)x=y;return ;}
+inline void dmax(LL &x,LL y){if(x<y)x=y;return ;}
+
+#define cout cerr
+#define pb push_back
+
+const LL N = 1000000+95 ;
+LL n,a[N],b[N];
+
+namespace seg{
+  const LL SIZE = (LL)(2e7)+95 , lim = (LL)(1e9) ;
+  struct node{int l,r,d;}s[SIZE];LL tot;
+  inline void up(LL p){s[p].d=max(s[s[p].l].d,s[s[p].r].d);}
+  void update(int &p,LL x,LL y,LL l=1,LL r=lim){
+    if(!p){p=++tot;s[p].l=s[p].r=s[p].d=0;}
+    if(l==r){s[p].d=max((LL)s[p].d,y);return ;}
+    LL mid=(l+r)>>1;
+    if(x<=mid)update(s[p].l,x,y,l,mid);
+    else update(s[p].r,x,y,mid+1,r);
+    up(p);return ;
+  }
+  LL query(LL p,LL x,LL l=1,LL r=lim){//[l,x]
+    if(l>x || !p)return 0;
+    if(r<=x)return s[p].d;
+    LL mid=(l+r)>>1;
+    if(x<=mid)return query(s[p].l,x,l,mid);
+    return max((LL)s[s[p].l].d,query(s[p].r,x,mid+1,r));
+  }
+}
+
+LL f[N],g[N];
+
+int main(){
+  n=read();
+  for(LL t=1;t<=n;t++)a[t]=read();
+  for(LL t=1;t<=n;t++)b[t]=read();
+
+  int rt=0;LL ans=0;
+  for(LL t=1;t<=n;t++){
+    f[t]=seg::query(rt,a[t]-1)+1;g[t]=seg::query(rt,b[t]-1)+1;
+    seg::update(rt,a[t],f[t]);seg::update(rt,b[t],g[t]);
+    dmax(ans,f[t]);dmax(ans,g[t]);
+    //    cout<<" -> t = "<<t<<" f[t] = "<<f[t]<<" g[t] = "<<g[t]<<" a[t] = "<<a[t]<<" b[t] = "<<b[t]<<endl;
+  }
+  writeln(ans);
+  return 0;
+}

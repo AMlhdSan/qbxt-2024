@@ -2,6 +2,10 @@
 
 所有文件笔记均已上传
 
+字体包也放在根目录下了，自取
+
+Clone 这个储存库： `git clone https://github.com/AMlhdSan/qbxt-2024.git`
+
 ## 使用说明:
 
 * 本次一共10场比赛,在文件夹 $Round1-10$ 中

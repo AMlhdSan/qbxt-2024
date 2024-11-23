@@ -4,6 +4,8 @@
 
 字体包也放在根目录下了，自取
 
+然后就是GitHub的LaTeX渲染太难看了，都放了一个marktext搞出来的html和pdf，好看很多。md文件下到本地看吧。
+
 Clone 这个储存库： `git clone https://github.com/AMlhdSan/qbxt-2024.git`
 
 ## 使用说明:
